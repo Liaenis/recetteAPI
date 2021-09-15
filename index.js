@@ -78,9 +78,14 @@ app.get("/", function (request, response) {
 
 app.get("/recette", function (request, response) {
     con.query("SELECT * from recette;", function (err, result) {
-        if (err) throw err;
-        console.log(result);
-        response.status(200).json(result);
+        if (err) {
+            let messErreur = "Une erreur est survenue";
+                response.status(503).json(messErreur);   
+        }
+        else{
+            console.log(result);
+            response.status(200).json(result);
+        }
     })
 });
 
